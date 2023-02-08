@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>First Lecture</title>
+
+	<link rel="stylesheet" href="assets/lib/leaflet/leaflet.css">
+	<link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.css">
+
+	<script src="assets/lib/leaflet/leaflet.js"></script>
+	<script src="assets/lib/leaflet/jquery.min.js"></script>
+
+    <style>
+        #map_div{
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+	
+
+	<div id="map_div" class="col-md-12"></div>
+
+
+<script>
+
+	
+	$(document).ready(function(){
+
+		// instancie object
+		 var myMap = L.map('map_div',{
+		 	 center: [31.59261, 76.31008],
+			 zoom: 13,
+			 zoomControl:true,
+			 dragging:true,
+			 minZoom:10,
+			 maxZoom:14,
+			 attributionControl:true
+		 });
+       // add tuile
+         var lyrOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        // add map objects 
+        myMap.addLayer(lyrOSM);
+		
+
+		//event handler on left click
+        myMap.on('click', function (e) {
+			alert(e.latlng.toString());
+			alert(myMap.getZoom());
+		});
+
+        //right clik
+		myMap.on('contextmenu', function(e){
+			L.marker(e.latlng).addTo(myMap).bindPopup(e.latlng.toString());
+		})
+        
+	});
+
+</script>
+
+
+
+</body>
+</html>
